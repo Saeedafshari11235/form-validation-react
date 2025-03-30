@@ -10,7 +10,6 @@ export default class Input extends Component {
     };
   }
 
-
   onBlurHandler(event) {
     if (event.target.value.length > 3) {
       this.setState({ validationClass: "hidden" });
@@ -32,7 +31,11 @@ export default class Input extends Component {
           onChange={this.props.setFormValue}
           onBlur={this.onBlurHandler.bind(this)}
         />
-        <div className={`error-notif ${this.state.validationClass}`}>
+        <div
+          className={`error-notif ${
+            this.props.type === "submit" ? "hidden" : this.state.validationClass
+          }`}
+        >
           <span>Enter a valid {label}</span>
         </div>
       </div>
