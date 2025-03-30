@@ -6,14 +6,10 @@ export default class Input extends Component {
     super(props);
 
     this.state = {
-      inputValue: this.props.value,
       validationClass: "hidden",
     };
   }
 
-  onChangeHandler(event) {
-    this.setState({ inputValue: event.target.value });
-  }
 
   onBlurHandler(event) {
     if (event.target.value.length > 3) {
@@ -24,18 +20,20 @@ export default class Input extends Component {
   }
 
   render() {
+    let { label, type, name } = this.props;
+
     return (
       <div className="input-container">
-        <label>{this.props.label}</label>
+        <label>{label}</label>
         <input
-          type={this.props.type}
-          name={this.props.name}
+          type={type}
+          name={name}
           value={this.state.inputValue}
-          onChange={this.onChangeHandler.bind(this)}
+          onChange={this.props.setFormValue}
           onBlur={this.onBlurHandler.bind(this)}
         />
         <div className={`error-notif ${this.state.validationClass}`}>
-          <span>Enter a valid {this.props.label}</span>
+          <span>Enter a valid {label}</span>
         </div>
       </div>
     );
